@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Auth from './Auth'
 import Account from './Account'
+import { Route } from 'react-router';
 
 export default function App() {
   const [session, setSession] = useState(null)
