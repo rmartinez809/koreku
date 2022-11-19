@@ -26,11 +26,17 @@ main {
     align-items: center;
 }
 
-.card {
+.card-body {
     text-align: center;
+    padding: 2rem;
+    padding-bottom: 0;
 }
 
 .login {
-    width: 24rem;
+    width: 22rem;
     margin: 5rem;
+}
+
+#btn-Google {
+    margin-bottom: 2rem;
 }
