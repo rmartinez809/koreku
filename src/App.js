@@ -22,11 +22,12 @@ export default function App() {
   return (
     <Router>
       <div>
-        {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
+        {!session ?
         <Routes>
-        <Route exact path ="/" element={<Auth />}/>
-        <Route exact path ="/register" element={<Auth />}/>
+          <Route exact path ="/" element={<Auth />}/>
+          <Route exact path ="/register" element={<Auth />}/>
         </Routes>
+        : <Account key={session.user.id} session={session} />}
       </div>
     </Router>
 
