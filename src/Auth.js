@@ -1,10 +1,14 @@
 import { Fragment, useState } from "react";
 import { supabase } from "./supabaseClient";
+import React from "react";
+import { useLocation, Link } from "react-router-dom";
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+
+  const location = useLocation();
 
   const minPassLen = 6;
 
@@ -78,16 +82,27 @@ export default function Auth() {
                 setPassword(event.target.value);
               }}
             ></input>
-            <button type="submit" className="btn btn-primary">LOGIN</button>
+            {/**
+             Change available fields if user is at /register url
+            */}
+            {location.pathname === "/register" ?
+              <Fragment>
+                <input type="password" className="form-control" id="confirmPass" placeholder="Confirm Password" value={confirmPass}
+                onChange={(event) => {
+                  setConfirmPass(event.target.value);
+                }}></input>
+                <button type="submit" className="btn btn-primary" id="register-btn">Sign Up</button>
+              </Fragment> : <button type="submit" className="btn btn-primary" id="login-btn">Log In</button>}
           </form>
           <hr></hr>
           <p>Or login with</p>
           <div className="d-grid gap-2">
             <button className="btn btn-secondary"
             onClick={signInWithGoogle}
-              >Sign in with Google</button>
+              >Google</button>
           </div>
-          <p>Not a member? <a href="/register">Sign up now</a></p>
+                {location.pathname === "/" ?
+                <p>Not a member? <Link to="/register">Sign up now</Link></p> : <p>Already have an account? <Link to="/">Log In</Link></p>}
         </div>
       </div>
       </main>

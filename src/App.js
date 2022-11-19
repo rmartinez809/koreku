@@ -4,6 +4,7 @@ import { supabase } from './supabaseClient'
 import Auth from './Auth'
 import Account from './Account'
 import { Route } from 'react-router';
+import { BrowserRouter as Router, Routes } from 'react-router-dom'
 
 export default function App() {
   const [session, setSession] = useState(null)
@@ -19,8 +20,15 @@ export default function App() {
   }, [])
 
   return (
-    <div>
-      {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
-    </div>
+    <Router>
+      <div>
+        {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
+        <Routes>
+        <Route exact path ="/" element={<Auth />}/>
+        <Route exact path ="/register" element={<Auth />}/>
+        </Routes>
+      </div>
+    </Router>
+
   )
 }
