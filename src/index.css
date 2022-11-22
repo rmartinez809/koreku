@@ -39,6 +39,7 @@ main {
 
 .login-card {
     width: 22rem;
+    min-width: 20rem;
     margin: 5rem;
 }
 

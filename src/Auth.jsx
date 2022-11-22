@@ -124,7 +124,7 @@ export default function Auth() {
           <div className="d-grid gap-2">
             <button className="btn btn-secondary"
             id="btn-Google"
-            onClick={signInWithGoogle}><img src={googleIcon} id="google-icon"></img>Google</button>
+            onClick={signInWithGoogle}><img alt="google logo" src={googleIcon} id="google-icon"></img>Google</button>
           </div>
             {location.pathname === "/" ?
             <p className="secondary">Not a member? <Link to="/register">Sign up</Link></p> : <p className="secondary">Already have an account? <Link to="/">Log In</Link></p>}

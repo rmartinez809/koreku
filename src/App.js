@@ -2,7 +2,7 @@ import './index.css'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Auth from './Auth'
-import Account from './Account'
+import Collection from './Collection'
 import { Route } from 'react-router';
 import { BrowserRouter as Router, Routes } from 'react-router-dom'
 
@@ -27,7 +27,7 @@ export default function App() {
           <Route exact path ="/" element={<Auth />}/>
           <Route exact path ="/register" element={<Auth />}/>
         </Routes>
-        : <Account key={session.user.id} session={session} />}
+        : <Collection key={session.user.id} session={session} />}
       </div>
     </Router>
 
