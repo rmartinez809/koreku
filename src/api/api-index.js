@@ -19,9 +19,8 @@ export const getProfile = async (session) => {
                 throw error
             }
 
-            if (data) {
-                console.log(await getSets(user.id));
-            }
+            const { id } = data;
+            return id;
         }
         catch (error) {
             alert(error.message)
@@ -29,13 +28,13 @@ export const getProfile = async (session) => {
     }
 }
 
-export const getSets = async (userId) => {
-    if (userId) {
+export const getUserCollections = async (userID) => {
+    if (userID) {
         try {
             let { data, error, status } = await supabase
                 .from('collections')
-                .select('collectionName')
-                .eq('creatorId', userId)
+                .select('collection_set')
+                .eq('creatorId', userID)
 
             if (error && status !== 406) {
                 throw error;
@@ -47,5 +46,8 @@ export const getSets = async (userId) => {
         catch (error) {
             alert(error.message)
         }
+    }
+    else {
+        return []
     }
 }

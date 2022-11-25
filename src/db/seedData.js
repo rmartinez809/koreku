@@ -2,7 +2,7 @@ const { supabase } = require('../supabaseClient');
 const fetch = require('node-fetch')
 const BASEURL = 'https://api.pokemontcg.io/v2/';
 
-const insertSet = async () => {
+const insertSets = async () => {
     console.log("* inserting data into sets table...")
 
     try {
@@ -22,7 +22,7 @@ const insertSet = async () => {
                 )
             });
 
-            console.log("  finished adding row to sets table...")
+            console.log("  finished adding data to sets table...")
         }
     }
     catch (error) {
@@ -33,6 +33,7 @@ const insertSet = async () => {
 const fetchSet = async () => {
     try {
         console.log("  fetching set data...")
+        //fetch all Base series sets
         const response = await fetch(`${BASEURL}/sets?q=series:base`, {
             method: 'GET',
             headers: {
@@ -48,9 +49,56 @@ const fetchSet = async () => {
     }
 }
 
+const insertCards = async () => {
+    console.log("* inserting data into cards table...")
+
+    try {
+        const { data } = await fetchCards();
+
+        if (data) {
+            data.forEach(async element => {
+                const { data, error } = await supabase
+                .from('cards')
+                .insert(
+                   { card_id: element.id ,
+                    name: element.name ,
+                    card_set: element.set.id ,
+                    img_sm: element.images.small ,
+                    img_lg: element.images.large }
+                )
+            });
+
+            console.log("  finished adding data to cards table...")
+        }
+    }
+    catch (error) {
+
+    }
+}
+
+const fetchCards = async () => {
+    try {
+        console.log("  fetching card data...");
+        //fetch all cards in Base set series
+        const response = await fetch(`${BASEURL}/cards?q=set.series:Base`, {
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        const data = await response.json();
+
+        return data
+    }
+    catch (error) {
+        throw error;
+    }
+}
+
 const buildDB = async () => {
     console.log("Building DB...");
-    await insertSet();
+    await insertSets();
+    await insertCards();
 }
 
 module.exports = {
