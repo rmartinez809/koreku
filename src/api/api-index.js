@@ -32,10 +32,9 @@ export const getProfile = async (session) => {
 export const getSets = async (userId) => {
     if (userId) {
         try {
-
             let { data, error, status } = await supabase
                 .from('collections')
-                .select()
+                .select('collectionName')
                 .eq('creatorId', userId)
 
             if (error && status !== 406) {

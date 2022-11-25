@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import { getProfile } from './api'
+import { getProfile } from './api/api-index'
 
 const Collection = ({ session }) => {
-
   useEffect(() => {
     getProfile(session)
   }, [session])
