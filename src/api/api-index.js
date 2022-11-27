@@ -51,3 +51,19 @@ export const getUserCollections = async (userID) => {
         return []
     }
 }
+
+export const fetchSets = async() => {
+    try {
+        let { data, error, status } = await supabase
+            .from('sets')
+            .select()
+        if (error && status !== 406) {
+            throw error
+        }
+
+        return data
+    }
+    catch (error) {
+        alert(error.message)
+    }
+}

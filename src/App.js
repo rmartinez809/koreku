@@ -27,7 +27,7 @@ export default function App() {
           <Route exact path ="/" element={<Auth />}/>
           <Route exact path ="/register" element={<Auth />}/>
         </Routes>
-        : <Collection key={session.user.id} session={session} />}
+        : <Collection session={session} />}
       </div>
     </Router>
 

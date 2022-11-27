@@ -8,8 +8,6 @@
     --blue: #1B53BA;
     --yellow: #FFCA08;
     --red: #ED1B24;
-
-
 }
 
 /* Reset browser defaults */
@@ -90,4 +88,63 @@ main {
 
 a {
     color: var(--primary-text)
+}
+
+/* Collection */
+.collections-container {
+    padding: 5rem;
+}
+
+.add-new-btn {
+    background-color: var(--card-bg-color);
+    display: block;
+    width: 6rem;
+    height: 3rem;
+    border-radius: 1rem;
+}
+
+.add-new-btn:active {
+    background-color: var(--bg-color);
+}
+
+.sign-out-btn {
+    margin-top: 5rem;
+}
+
+/* SelectSet */
+
+.modal-content {
+    background-color: var(--card-bg-color);
+}
+
+.modal-header, .modal-footer {
+    border: none;
+}
+
+.modal-header {
+    margin-bottom: 2rem;
+}
+
+.modal-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0rem;
+}
+
+.set-card {
+    width: 9rem;
+    margin: 0.1rem;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.set-card img {
+    width: 6rem;
+}
+
+.set-card:hover {
+    cursor: pointer;
+    background-color: #3a3a3a;
 }
