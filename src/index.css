@@ -90,11 +90,11 @@ a {
     color: var(--primary-text)
 }
 
-/* Collection */
-.collections-container {
+.container-padding {
     padding: 5rem;
 }
 
+/* Collection */
 .add-new-btn {
     background-color: var(--card-bg-color);
     display: block;
@@ -148,3 +148,5 @@ a {
     cursor: pointer;
     background-color: #3a3a3a;
 }
+
+/* Binder */

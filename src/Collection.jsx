@@ -23,9 +23,9 @@ const Collection = ({ session }) => {
 
 
   return (
-    <div className='collections-container'>
+    <div className='collections-container container-padding'>
       <div className="modal fade" id="selectSetsModal" tabIndex="-1" aria-labelledby="selectSetsModal" aria-hidden="true">
-        <SelectSet />
+        <SelectSet userID={userID}/>
       </div>
       <h3>Collections</h3>
       <button type="button"

@@ -64,7 +64,8 @@ const insertCards = async () => {
                     name: element.name ,
                     card_set: element.set.id ,
                     img_sm: element.images.small ,
-                    img_lg: element.images.large }
+                    img_lg: element.images.large,
+                     number: Number(element.number)}
                 )
             });
 
@@ -80,7 +81,7 @@ const fetchCards = async () => {
     try {
         console.log("  fetching card data...");
         //fetch all cards in Base set series
-        const response = await fetch(`${BASEURL}/cards?q=set.series:Base`, {
+        const response = await fetch(`${BASEURL}/cards?q=set.id:basep`, {
             method: 'GET',
             headers: {
                 'Content-Type' : 'application/json'
@@ -97,7 +98,7 @@ const fetchCards = async () => {
 
 const buildDB = async () => {
     console.log("Building DB...");
-    await insertSets();
+    // await insertSets();
     await insertCards();
 }
 
