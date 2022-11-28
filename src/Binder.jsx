@@ -7,6 +7,7 @@ const Binder = () => {
 
     const [collectionName, setCollectionName] = useState('')
     const [allCardsInSet, setAllCardsInSet] = useState([])
+    const [loading, setLoading] = useState(false);
 
     useEffect( () => {
         async function fetchData() {
@@ -36,6 +37,12 @@ const Binder = () => {
                             <div className="card card-bg-color pkmn-card"
                             key={element.id}>
                                 <img src={element.img_sm}></img>
+                                <div className="pkmn-card-footer">
+                                    <label className="switch">
+                                        <input type="checkbox"></input>
+                                        <span className="slider round"></span>
+                                    </label>
+                                </div>
                             </div>
                         )
                     })
