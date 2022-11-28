@@ -170,6 +170,10 @@ a {
     border-radius: 0.25rem;
 }
 
+.transparent {
+    opacity: 0.3;
+}
+
 .switch {
     position: relative;
     display: inline-block;
