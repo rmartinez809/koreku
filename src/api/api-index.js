@@ -200,3 +200,51 @@ export const fetchCardsCollection = async (collection_id) => {
         return []
     }
 }
+
+export const addCardToCollection = async (card_id, collection_id) => {
+    try {
+        let { data, error, status } = await supabase
+            .from('cards_collections')
+            .insert({
+                card_id,
+                collection_id
+            })
+            .select()
+
+        if (error && status !== 406) {
+            throw error
+        }
+
+        return data;
+    }
+    catch (error) {
+        alert(error.message)
+        return []
+    }
+
+}
+
+export const removeCardFromCollection = async (card_id, collection_id) => {
+    try {
+        let { data, error, status } = await supabase
+            .from('cards_collections')
+            .delete()
+            .match({
+                'card_id': card_id,
+                'collection_id': collection_id
+            })
+            .select()
+
+        if (error && status !== 406) {
+            throw error
+        }
+
+        return data
+
+    }
+    catch (error) {
+        alert(error.message)
+        return []
+    }
+
+}

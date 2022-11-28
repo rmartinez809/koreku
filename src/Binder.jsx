@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCollectionInfo, fetchCardsInSet, fetchCardsCollection } from "./api/api-index";
+import { getCollectionInfo, fetchCardsInSet, fetchCardsCollection, addCardToCollection, removeCardFromCollection } from "./api/api-index";
 
 const Binder = () => {
     const { collectionID } = useParams();
@@ -32,10 +32,32 @@ const Binder = () => {
         fetchData()
     }, [])
 
+
+    const handleEditCollection = async (card_id) => {
+        const cardImageElement = document.getElementById(card_id);
+
+        //if the card exists in the collection
+            //remove it from the collection
+            //add the transparency class
+        //else:
+            //add it to the collection
+            //remove the transparency class
+        if (cardsInCollection.map(item => item.card_id).includes(card_id)) {
+            await removeCardFromCollection(card_id, collectionID)
+            cardImageElement.classList.add('transparent')
+        }
+        else {
+            const response = await addCardToCollection(card_id, collectionID)
+
+            if (response) {
+                cardImageElement.classList.remove('transparent')
+            }
+        }
+
+    }
+
     return (
         <div className="binder-container container-padding">
-                    {console.log(allCardsInSet)}
-
             <h3>{collectionName}</h3>
             <div className="cards-container">
                 {
@@ -44,14 +66,21 @@ const Binder = () => {
                             <div className="card card-bg-color pkmn-card"
                             key={element.id}>
                                 <img src={element.img_sm}
+                                    id={element.card_id}
                                     //if card doesn't exist in collection make it transparent
                                     className={
-                                        cardsInCollection.map(item => item.card_id).includes(element.card_id) ? "test-class" : "transparent"
+                                        cardsInCollection.map(item => item.card_id).includes(element.card_id) ? "" : "transparent"
                                     }>
                                 </img>
                                 <div className="pkmn-card-footer">
                                     <label className="switch">
-                                        <input type="checkbox"></input>
+                                        <input type="checkbox"
+                                            id={`btn-${element.card_id}`}
+                                            defaultChecked={cardsInCollection.map(item => item.card_id).includes(element.card_id) ? true : false}
+                                            onChange={() => {
+                                                handleEditCollection(element.card_id);
+                                            }}
+                                        ></input>
                                         <span className="slider round"></span>
                                     </label>
                                 </div>
@@ -60,8 +89,8 @@ const Binder = () => {
                     })
                 }
             </div>
-            {console.log(allCardsInSet)}
-            {console.log(cardsInCollection)}
+            {/* {console.log(allCardsInSet)}
+            {console.log(cardsInCollection)} */}
         </div>
     )
 }

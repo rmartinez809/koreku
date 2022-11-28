@@ -151,12 +151,17 @@ a {
 }
 
 /* Binder */
-.cards-container {
-    margin-top: 2rem;
+.binder-container {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.cards-container {
+    align-self: center;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
 }
 
 .pkmn-card {
