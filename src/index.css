@@ -150,3 +150,20 @@ a {
 }
 
 /* Binder */
+.cards-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.pkmn-card {
+    padding: 1rem;
+    width: 15rem;
+    margin: 0.25rem;
+}
+
+.pkmn-card img {
+    border-radius: 0.25rem;
+}

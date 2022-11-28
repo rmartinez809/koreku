@@ -91,7 +91,6 @@ export const getCollectionInfo = async (collection_id) => {
             throw error
         }
 
-        console.log(data)
         return data
     }
     catch (error) {
@@ -161,10 +160,23 @@ export const fetchCardsInSet = async (set_id) => {
             throw error
         }
 
-        return data;
+        return sortCards(data);
     }
     catch (error) {
         alert(error.message)
+        return []
+    }
+}
+
+export const sortCards = (cards) => {
+    if (cards) {
+        for (let i = 0; i < cards.length; i++) {
+            cards.sort(function(a,b) {return a.number - b.number})
+        }
+
+        return cards
+    }
+    else {
         return []
     }
 }

@@ -26,7 +26,21 @@ const Binder = () => {
 
     return (
         <div className="binder-container container-padding">
+                    {console.log(allCardsInSet)}
+
             <h3>{collectionName}</h3>
+            <div className="cards-container">
+                {
+                    allCardsInSet.map( element => {
+                        return (
+                            <div className="card card-bg-color pkmn-card"
+                            key={element.id}>
+                                <img src={element.img_sm}></img>
+                            </div>
+                        )
+                    })
+                }
+            </div>
             {console.log(allCardsInSet)}
         </div>
     )
