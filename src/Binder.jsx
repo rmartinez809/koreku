@@ -44,6 +44,7 @@ const Binder = () => {
             //remove the transparency class
         if (cardsInCollection.map(item => item.card_id).includes(card_id)) {
             await removeCardFromCollection(card_id, collectionID)
+            setCardsInCollection(await fetchCardsCollection(collectionID));
             cardImageElement.classList.add('transparent')
         }
         else {
@@ -51,6 +52,7 @@ const Binder = () => {
 
             if (response) {
                 cardImageElement.classList.remove('transparent')
+                setCardsInCollection(await fetchCardsCollection(collectionID));
             }
         }
 
