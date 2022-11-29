@@ -1,25 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from './supabaseClient'
-import { getProfile, getUserCollections } from './api/api-index'
 import SelectSet from './SelectSet'
+import { getUserCollections } from './api/api-index'
 
-const Collection = ({ session }) => {
-  const [userID, setUserID] = useState('');
-  const [userCollection, setUserCollection] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      setUserID(await getProfile(session));
-    }
-    fetchData()
-  }, [session])
+const Collection = ({ userID, userCollection, setUserCollection }) => {
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       setUserCollection(await getUserCollections(userID));
     }
     fetchData()
-  }, [userID])
+  }, [userCollection])
 
 
   return (
@@ -38,7 +31,23 @@ const Collection = ({ session }) => {
           <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
           </svg>
       </button>
-      {/* {userCollection.length === 0 ? "" : <p>You have {userCollection.length} collections!</p> } */}
+      <div className='my-collections'>
+        {
+          userCollection.map( element => {
+            return (
+              <div className='card card-bg-color set-card'
+                key={element.id}
+                title={element.sets.set_name}
+                  onClick={ () => {
+                    navigate(`/mycollections/${element.id}`)
+                  }
+                  }>
+                  <img src={element.sets.logo} alt="set logo"></img>
+              </div>
+            )
+          })
+        }
+      </div>
       <button type="button" className="button block sign-out-btn" onClick={() => supabase.auth.signOut()}>
         Sign Out
       </button>

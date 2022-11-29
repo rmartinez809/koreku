@@ -35,7 +35,10 @@ export const getUserCollections = async (userID) => {
         try {
             let { data, error, status } = await supabase
                 .from('collections')
-                .select('collection_set_id')
+                .select(`
+                    collection_set_id, id,
+                    sets (*)
+                `)
                 .eq('creator_id', userID)
 
             if (error && status !== 406) {
@@ -99,6 +102,23 @@ export const getCollectionInfo = async (collection_id) => {
     }
 }
 
+export const deleteCollection = async (collection_id) => {
+    try {
+        let { data, error, status } = await supabase
+            .from('collections')
+            .delete()
+            .eq('id',collection_id)
+
+        if (error && status !== 406) {
+            throw error
+        }
+
+    }
+    catch (error) {
+        alert(error.message)
+    }
+}
+
 //SETS
 //Get all sets
 export const fetchSets = async() => {
@@ -117,37 +137,6 @@ export const fetchSets = async() => {
         alert(error.message)
     }
 }
-
-//CARDS
-// //Get cards from a collection's set
-// export const fetchCardsCollectionSet = async (collection_id) => {
-//         try {
-//             //grab the set id for the collection
-//             let { data, error, status } = await supabase
-//                 .from('collections')
-//                 .select(`
-//                     collection_set_id,
-//                     sets (
-//                         set_id
-//                     )
-//                 `)
-//                 .eq('id', collection_id)
-//                 .single()
-
-//             if (error && status !== 406) {
-//                 throw error
-//             }
-
-//             //get cards in collection
-//             if (data) {
-//                return await fetchCardsInSet(data.collection_set_id)
-//             }
-//         }
-//         catch (error) {
-//             alert(error.message)
-//             return []
-//         }
-//     }
 
 export const fetchCardsInSet = async (set_id) => {
     try {
