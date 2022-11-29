@@ -4,13 +4,14 @@ import { supabase } from './supabaseClient'
 import Auth from './Auth'
 import Collection from './Collection'
 import Binder from './Binder'
+import Loading from './Loading'
 import { Route } from 'react-router';
 import { BrowserRouter as Router, Routes } from 'react-router-dom'
 import { getProfile, getUserCollections } from './api/api-index'
 
-
 export default function App() {
   const [session, setSession] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -51,7 +52,8 @@ export default function App() {
         :
         <Routes>
           <Route path="/"
-            element={<Collection userID={userID}  userCollection={userCollection} setUserCollection={setUserCollection}/>} />
+            element={<Collection userID={userID}  userCollection={userCollection} setUserCollection={setUserCollection}
+            loading={loading} setLoading={setLoading}/>} />
           <Route path="/mycollections/:collectionID"
             element={<Binder
             setUserCollection={setUserCollection} userCollection={userCollection} userID={userID}/>} />

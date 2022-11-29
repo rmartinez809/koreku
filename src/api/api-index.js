@@ -49,7 +49,9 @@ export const getUserCollections = async (userID) => {
 
         }
         catch (error) {
+            return []
             alert(error.message)
+
         }
     }
     else {

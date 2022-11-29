@@ -65,16 +65,14 @@ const Binder = ({ setUserCollection, userID, userCollection }) => {
 
         async function deleteCardsInCollection() {
             cardsInCollection.forEach( async card => {
-                console.log(`removing card: ${card.card_id}`)
                 await removeCardFromCollection(card.card_id, collectionID)
             })
         }
 
         async function removeCollection() {
-            console.log(`deleting collection: ${collectionID}`)
             setTimeout(async () => {
                 await deleteCollection(collectionID)
-            }, 3000)
+            }, 2000)
         }
 
         async function updateCollectionState() {
@@ -83,11 +81,8 @@ const Binder = ({ setUserCollection, userID, userCollection }) => {
 
         async function removeUserCollection() {
             await deleteCardsInCollection()
-            console.log('  cards removed...')
             await removeCollection()
-            console.log('  collection deleted...')
             await updateCollectionState()
-            console.log('userCollections state updated...')
             setTimeout( () => {
                 alert("Collection deleted")
                 navigate('/')

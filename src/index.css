@@ -95,6 +95,19 @@ a {
     padding: 5rem;
 }
 
+/* Loading */
+.loading-screen {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-screen img {
+    height: 4rem;
+}
+
 /* Collection */
 .add-new-btn {
     background-color: var(--card-bg-color);

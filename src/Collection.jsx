@@ -1,11 +1,20 @@
-import { useEffect } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from './supabaseClient'
 import SelectSet from './SelectSet'
 import { getUserCollections } from './api/api-index'
+import Loading from './Loading'
 
-const Collection = ({ userID, userCollection, setUserCollection }) => {
+const Collection = ({ userID, userCollection, setUserCollection, loading, setLoading }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setLoading(true)
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000)
+  }, [])
 
   useEffect(() => {
     async function fetchData() {
@@ -16,6 +25,8 @@ const Collection = ({ userID, userCollection, setUserCollection }) => {
 
 
   return (
+    <Fragment>
+      {loading === true ? <Loading /> : (
     <div className='collections-container container-padding'>
       <div className="modal fade" id="selectSetsModal" tabIndex="-1" aria-labelledby="selectSetsModal" aria-hidden="true">
         <SelectSet userID={userID}/>
@@ -52,6 +63,8 @@ const Collection = ({ userID, userCollection, setUserCollection }) => {
         Sign Out
       </button>
     </div>
+    )}
+    </Fragment>
   )
 }
 
