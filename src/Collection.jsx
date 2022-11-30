@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from './supabaseClient'
 import SelectSet from './SelectSet'
@@ -27,7 +27,7 @@ const Collection = ({ userID, userCollection, setUserCollection, loading, setLoa
   return (
     <Fragment>
       {loading === true ? <Loading /> : (
-    <div className='collections-container container-padding'>
+    <div className='collections-container container-padding animation'>
       <div className="modal fade" id="selectSetsModal" tabIndex="-1" aria-labelledby="selectSetsModal" aria-hidden="true">
         <SelectSet userID={userID}/>
       </div>

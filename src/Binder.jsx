@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCollectionInfo, fetchCardsInSet, fetchCardsCollection, addCardToCollection, removeCardFromCollection, deleteCollection, getUserCollections } from "./api/api-index";
+import Loading from "./Loading";
 
-const Binder = ({ setUserCollection, userID, userCollection }) => {
+const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
     const navigate = useNavigate();
 
     const { collectionID } = useParams();
@@ -10,6 +11,14 @@ const Binder = ({ setUserCollection, userID, userCollection }) => {
     const [collectionName, setCollectionName] = useState('')
     const [allCardsInSet, setAllCardsInSet] = useState([])
     const [cardsInCollection, setCardsInCollection] = useState([])
+
+    useEffect(() => {
+        setLoading(true)
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 4000)
+    }, [])
 
     useEffect( () => {
         async function fetchData() {
@@ -94,7 +103,9 @@ const Binder = ({ setUserCollection, userID, userCollection }) => {
 
 
     return (
-        <div className="binder-container container-padding">
+        <Fragment>
+            {loading === true ? <Loading /> : (
+        <div className="binder-container container-padding animation">
             <h3>{collectionName}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16"
             onClick={ () => {
@@ -136,9 +147,9 @@ const Binder = ({ setUserCollection, userID, userCollection }) => {
                     })
                 }
             </div>
-            {/* {console.log(allCardsInSet)}
-            {console.log(cardsInCollection)} */}
         </div>
+        )}
+        </Fragment>
     )
 }
 
