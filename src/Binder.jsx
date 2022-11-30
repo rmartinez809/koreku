@@ -2,6 +2,8 @@ import { useEffect, useState, Fragment } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCollectionInfo, fetchCardsInSet, fetchCardsCollection, addCardToCollection, removeCardFromCollection, deleteCollection, getUserCollections } from "./api/api-index";
 import Loading from "./Loading";
+import Header from './Header'
+
 
 const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
     const navigate = useNavigate();
@@ -104,6 +106,7 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
 
     return (
         <Fragment>
+            <Header />
             {loading === true ? <Loading /> : (
         <div className="binder-container container-padding animation">
             <h3>{collectionName}

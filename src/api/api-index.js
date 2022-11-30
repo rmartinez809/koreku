@@ -20,8 +20,11 @@ export const getProfile = async (session) => {
                 throw error
             }
 
-            const { id } = data;
-            return id;
+            if (data) {
+                const { id } = data;
+                return id;
+            }
+            else return []
         }
         catch (error) {
             alert(error.message)
@@ -45,17 +48,12 @@ export const getUserCollections = async (userID) => {
                 throw error;
             }
 
-            return data;
-
+            if (data) return data;
+            else return []
         }
         catch (error) {
-            return []
             alert(error.message)
-
         }
-    }
-    else {
-        return []
     }
 }
 

@@ -95,6 +95,15 @@ a {
     padding: 5rem;
 }
 
+/* Header */
+.header-container {
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
 /* Loading */
 .loading-screen {
     height: 100vh;
