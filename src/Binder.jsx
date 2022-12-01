@@ -75,19 +75,25 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
     const handleDeleteCollection = async () => {
 
         async function deleteCardsInCollection() {
+            console.log(`removing cards in collection`)
             cardsInCollection.forEach( async card => {
                 await removeCardFromCollection(card.card_id, collectionID)
             })
+            console.log('  cards removed...')
         }
 
         async function removeCollection() {
+            console.log('deleting collection')
             setTimeout(async () => {
                 await deleteCollection(collectionID)
             }, 2000)
+            console.log('  collection deleted...')
         }
 
         async function updateCollectionState() {
+            console.log('updating state')
             setUserCollection(await getUserCollections(userID))
+            console.log('  state updated...')
         }
 
         async function removeUserCollection() {
@@ -108,7 +114,7 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
         <Fragment>
             <Header />
             {loading === true ? <Loading /> : (
-        <div className="binder-container container-padding animation">
+        <div className="binder-container container-padding">
             <h3>{collectionName}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16"
             onClick={ () => {

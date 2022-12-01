@@ -19,17 +19,20 @@ const Collection = ({ userID, userCollection, setUserCollection, loading, setLoa
 
   useEffect(() => {
     async function fetchData() {
-      setUserCollection(await getUserCollections(userID));
+      if (userID) {
+        setUserCollection(await getUserCollections(userID));
+      }
     }
     fetchData()
-  }, [userCollection])
+  }, [])
 
 
   return (
     <Fragment>
+      {console.log(userCollection)}
       <Header />
       {loading === true ? <Loading /> : (
-    <div className='collections-container container-padding animation'>
+    <div className='collections-container container-padding'>
       <div className="modal fade" id="selectSetsModal" tabIndex="-1" aria-labelledby="selectSetsModal" aria-hidden="true">
         <SelectSet userID={userID}/>
       </div>
