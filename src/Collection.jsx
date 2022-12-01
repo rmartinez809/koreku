@@ -61,9 +61,6 @@ const Collection = ({ userID, userCollection, setUserCollection, loading, setLoa
           })
         }
       </div>
-      <button type="button" className="button block sign-out-btn" onClick={() => supabase.auth.signOut()}>
-        Sign Out
-      </button>
     </div>
     )}
     </Fragment>

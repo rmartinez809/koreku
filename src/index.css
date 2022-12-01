@@ -102,6 +102,19 @@ a {
     padding-right: 2rem;
     display: flex;
     justify-content: space-between;
+    background-color: var(--card-bg-color);
+}
+
+.nav-home {
+    text-decoration: none;
+}
+
+.nav-home:hover {
+    color: var(--primary-text)
+}
+
+.signOut-div:hover {
+    cursor: pointer;
 }
 
 /* Loading */
