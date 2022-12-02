@@ -95,6 +95,41 @@ a {
     padding: 5rem;
 }
 
+/* Header */
+.header-container {
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--card-bg-color);
+}
+
+.nav-home {
+    text-decoration: none;
+}
+
+.nav-home:hover {
+    color: var(--primary-text)
+}
+
+.signOut-div:hover {
+    cursor: pointer;
+}
+
+/* Loading */
+.loading-screen {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-screen img {
+    height: 4rem;
+}
+
 /* Collection */
 .add-new-btn {
     background-color: var(--card-bg-color);
@@ -106,6 +141,11 @@ a {
 
 .add-new-btn:active {
     background-color: var(--bg-color);
+}
+
+.my-collections {
+    margin-top: 2rem;
+    display: flex;
 }
 
 .sign-out-btn {
@@ -155,6 +195,16 @@ a {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.binder-container h3{
+    margin-bottom: 2rem;
+}
+
+.bi-trash {
+    color: var(--red);
+    margin-left: 1rem;
+    cursor: pointer;
 }
 
 .cards-container {

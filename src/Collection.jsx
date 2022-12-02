@@ -1,28 +1,36 @@
-import { useState, useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { supabase } from './supabaseClient'
-import { getProfile, getUserCollections } from './api/api-index'
 import SelectSet from './SelectSet'
+import Header from './Header'
+import { getUserCollections } from './api/api-index'
+import Loading from './Loading'
 
-const Collection = ({ session }) => {
-  const [userID, setUserID] = useState('');
-  const [userCollection, setUserCollection] = useState([]);
+const Collection = ({ userID, userCollection, setUserCollection, loading, setLoading }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setLoading(true)
+  }, [])
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000)
+  }, [])
 
   useEffect(() => {
     async function fetchData() {
-      setUserID(await getProfile(session));
+      if (userID) {
+        setUserCollection(await getUserCollections(userID));
+      }
     }
     fetchData()
-  }, [session])
-
-  useEffect(() => {
-    async function fetchData() {
-      setUserCollection(await getUserCollections(userID));
-    }
-    fetchData()
-  }, [userID])
+  }, [])
 
 
   return (
+    <Fragment>
+      <Header />
+      {loading === true ? <Loading /> : (
     <div className='collections-container container-padding'>
       <div className="modal fade" id="selectSetsModal" tabIndex="-1" aria-labelledby="selectSetsModal" aria-hidden="true">
         <SelectSet userID={userID}/>
@@ -38,11 +46,26 @@ const Collection = ({ session }) => {
           <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
           </svg>
       </button>
-      {/* {userCollection.length === 0 ? "" : <p>You have {userCollection.length} collections!</p> } */}
-      <button type="button" className="button block sign-out-btn" onClick={() => supabase.auth.signOut()}>
-        Sign Out
-      </button>
+      <div className='my-collections'>
+        {
+          userCollection.map( element => {
+            return (
+              <div className='card card-bg-color set-card'
+                key={element.id}
+                title={element.sets.set_name}
+                  onClick={ () => {
+                    navigate(`/mycollections/${element.id}`)
+                  }
+                  }>
+                  <img src={element.sets.logo} alt="set logo"></img>
+              </div>
+            )
+          })
+        }
+      </div>
     </div>
+    )}
+    </Fragment>
   )
 }
 
