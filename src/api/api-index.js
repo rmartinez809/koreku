@@ -34,7 +34,6 @@ export const getProfile = async (session) => {
 
 //COLLECTIONS
 export const getUserCollections = async (userID) => {
-    console.log(`calling api with ${userID}`)
     if (userID) {
         try {
             let { data, error, status } = await supabase
@@ -50,7 +49,6 @@ export const getUserCollections = async (userID) => {
             }
 
             if (data){
-                console.log(`returning data...${data}`)
                 return data;
             }
             else return []

@@ -29,7 +29,6 @@ const Collection = ({ userID, userCollection, setUserCollection, loading, setLoa
 
   return (
     <Fragment>
-      {console.log(userCollection)}
       <Header />
       {loading === true ? <Loading /> : (
     <div className='collections-container container-padding'>
