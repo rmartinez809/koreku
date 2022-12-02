@@ -74,39 +74,71 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
     //then delete entry in cards_collections table
     const handleDeleteCollection = async () => {
 
-        async function deleteCardsInCollection() {
-            console.log(`removing cards in collection`)
-            cardsInCollection.forEach( async card => {
-                await removeCardFromCollection(card.card_id, collectionID)
+        const deleteCardsInCollection = async () => {
+            new Promise((resolve) => {
+                console.log('deleting cards in collection...')
+                cardsInCollection.forEach( async card => {
+                     await removeCardFromCollection(card.card_id, collectionID)
+                })
+                console.log('  all cards removed')
+                resolve()
             })
-            console.log('  cards removed...')
         }
 
-        async function removeCollection() {
-            console.log('deleting collection')
-            setTimeout(async () => {
-                await deleteCollection(collectionID)
-            }, 2000)
-            console.log('  collection deleted...')
+        const removeCollection = async () => {
+            const wait = (delay, ...args) => new Promise(resolve =>
+                setTimeout(resolve, delay, ...args));
+
+            console.log('deleting collection...');
+
+            await wait(3000);
+
+            await deleteCollection(collectionID)
+
+            console.log('  collection deleted')
         }
 
-        async function updateCollectionState() {
-            console.log('updating state')
-            setUserCollection(await getUserCollections(userID))
-            console.log('  state updated...')
+        const updateCollectionState = async () => {
+            console.log('updating state...')
+            setUserCollection(await getUserCollections(userID));
         }
+
+
+
+
+        // deleteCards.then( async () => {
+        //
+
+        //     , await deleteCollection(collectionID));
+
+        //     console.log('  collection deleted')
+        // })
+
+        // deleteCards.then(async () => {
+        //     console.log('updating state...')
+        //     setUserCollection(await getUserCollections(userID))
+        //     navigate('/')
+        // })
+
 
         async function removeUserCollection() {
-            await deleteCardsInCollection()
-            await removeCollection()
-            await updateCollectionState()
-            setTimeout( () => {
-                alert("Collection deleted")
+            try {
+                await deleteCardsInCollection()
+                console.log('AFTER CARDS ARE REMOVED')
+                await removeCollection()
+                console.log('AFTER COLLECTION ARE DELETED')
+                await updateCollectionState()
+                console.log("STATE UPDATED")
                 navigate('/')
-            }, 1000)
+            }
+            catch (error) {
+                alert(error.message)
+            }
         }
 
-        removeUserCollection();
+        await removeUserCollection();
+
+
     }
 
 
