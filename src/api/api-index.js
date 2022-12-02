@@ -91,47 +91,53 @@ export const createNewCollection = async (collection_set_id, custom_name, creato
 
 export const getCollectionInfo = async (collection_id, creator_id) => {
     if (collection_id && creator_id) {
-    try {
-        let { data, error, status } = await supabase
-            .from('collections')
-            .select()
-            .match({
-                'id': collection_id
-            })
-            .single()
+        try {
+            let { data, error, status } = await supabase
+                .from('collections')
+                .select()
+                .match({
+                    'id': collection_id
+                })
+                .single()
 
-        if (error && status !== 406) {
-            throw error
+            if (error && status !== 406) {
+                throw error
+            }
+
+            if (data.creator_id !== creator_id) {
+                throw new Error(authErrorMsg)
+            }
+
+            return data
         }
-
-        if (data.creator_id !== creator_id) {
-            throw new Error(authErrorMsg)
+        catch (error) {
+            alert(error.message)
+            window.location.assign('/')
+            return []
         }
-
-        return data
-    }
-    catch (error) {
-        alert(error.message)
-        window.location.assign('/')
-        return []
     }
 }
-}
 
-export const deleteCollection = async (collection_id) => {
-    try {
-        let { data, error, status } = await supabase
-            .from('collections')
-            .delete()
-            .eq('id',collection_id)
+export const deleteCollection = async (collection_id, creator_id) => {
+    if (collection_id && creator_id) {
+        try {
+            let { data, error, status } = await supabase
+                .from('collections')
+                .delete()
+                .match({
+                    'id': collection_id,
+                    'creator_id': creator_id
+                })
+                .select()
 
-        if (error && status !== 406) {
-            throw error
+            if (error && status !== 406) {
+                throw error
+            }
+
         }
-
-    }
-    catch (error) {
-        alert(error.message)
+        catch (error) {
+            console.error(error.message)
+        }
     }
 }
 

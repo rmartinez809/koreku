@@ -93,7 +93,7 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
                 setTimeout(resolve, delay, ...args));
 
             await wait(3000);
-            await deleteCollection(collectionID)
+            await deleteCollection(collectionID, userID)
         }
 
         const updateCollectionState = async () => {
