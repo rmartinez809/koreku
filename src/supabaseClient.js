@@ -1,4 +1,3 @@
-// export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 const { createClient } = require('@supabase/supabase-js')
 
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
