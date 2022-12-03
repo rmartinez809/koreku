@@ -4,6 +4,8 @@
 
 import { supabase } from "../supabaseClient";
 
+const authErrorMsg = "You do not have permissions to access this collection!";
+
 //USER PROFILE
 export const getProfile = async (session) => {
     if (session) {
@@ -87,40 +89,55 @@ export const createNewCollection = async (collection_set_id, custom_name, creato
     }
 }
 
-export const getCollectionInfo = async (collection_id) => {
-    try {
-        let { data, error, status } = await supabase
-            .from('collections')
-            .select()
-            .eq('id',collection_id)
-            .single()
+export const getCollectionInfo = async (collection_id, creator_id) => {
+    if (collection_id && creator_id) {
+        try {
+            let { data, error, status } = await supabase
+                .from('collections')
+                .select()
+                .match({
+                    'id': collection_id
+                })
+                .single()
 
-        if (error && status !== 406) {
-            throw error
+            if (error && status !== 406) {
+                throw error
+            }
+
+            if (data.creator_id !== creator_id) {
+                throw new Error(authErrorMsg)
+            }
+
+            return data
         }
-
-        return data
-    }
-    catch (error) {
-        console.error(error.message)
-        return []
+        catch (error) {
+            alert(error.message)
+            window.location.assign('/')
+            return []
+        }
     }
 }
 
-export const deleteCollection = async (collection_id) => {
-    try {
-        let { data, error, status } = await supabase
-            .from('collections')
-            .delete()
-            .eq('id',collection_id)
+export const deleteCollection = async (collection_id, creator_id) => {
+    if (collection_id && creator_id) {
+        try {
+            let { data, error, status } = await supabase
+                .from('collections')
+                .delete()
+                .match({
+                    'id': collection_id,
+                    'creator_id': creator_id
+                })
+                .select()
 
-        if (error && status !== 406) {
-            throw error
+            if (error && status !== 406) {
+                throw error
+            }
+
         }
-
-    }
-    catch (error) {
-        console.error(error.message)
+        catch (error) {
+            console.error(error.message)
+        }
     }
 }
 
@@ -158,19 +175,6 @@ export const fetchCardsInSet = async (set_id) => {
     }
     catch (error) {
         console.error(error.message)
-        return []
-    }
-}
-
-export const sortCards = (cards) => {
-    if (cards) {
-        for (let i = 0; i < cards.length; i++) {
-            cards.sort(function(a,b) {return a.number - b.number})
-        }
-
-        return cards
-    }
-    else {
         return []
     }
 }
@@ -241,4 +245,18 @@ export const removeCardFromCollection = async (card_id, collection_id) => {
         return []
     }
 
+}
+
+// Helpers
+export const sortCards = (cards) => {
+    if (cards) {
+        for (let i = 0; i < cards.length; i++) {
+            cards.sort(function(a,b) {return a.number - b.number})
+        }
+
+        return cards
+    }
+    else {
+        return []
+    }
 }

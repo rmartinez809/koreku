@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 const { Fragment } = require("react")
 
 const Header = (() => {
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
     return (
         <Fragment>
