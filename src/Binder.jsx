@@ -24,19 +24,23 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
 
     useEffect( () => {
         async function fetchData() {
-            const data = await getCollectionInfo(collectionID)
-            setCollectionName(data.custom_name)
+            if (userID) {
+                const data = await getCollectionInfo(collectionID, userID)
+                setCollectionName(data.custom_name)
+            }
         }
         fetchData()
-    }, [])
+    }, [userID])
 
     useEffect( () => {
         async function fetchData() {
-            const data = await getCollectionInfo(collectionID)
-            setAllCardsInSet(await fetchCardsInSet(data.collection_set_id))
+            if (userID) {
+                const data = await getCollectionInfo(collectionID, userID)
+                setAllCardsInSet(await fetchCardsInSet(data.collection_set_id))
+            }
         }
         fetchData()
-    }, [])
+    }, [userID])
 
     useEffect( () => {
         async function fetchData() {
@@ -89,7 +93,7 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
                 setTimeout(resolve, delay, ...args));
 
             await wait(3000);
-            await deleteCollection(collectionID)
+            await deleteCollection(collectionID, userID)
         }
 
         const updateCollectionState = async () => {
