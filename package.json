@@ -1,7 +1,6 @@
 {
   "name": "iqoqo",
   "version": "0.1.0",
-  "homepage": "https://rmartinez809.github.io/koreku",
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.0.5",

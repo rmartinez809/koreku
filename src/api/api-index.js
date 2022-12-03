@@ -16,7 +16,6 @@ export const getProfile = async (session) => {
                 .from('profiles')
                 .select('id')
                 .eq('id', user.id)
-                .single()
 
             if (error && status !== 406) {
                 throw error
