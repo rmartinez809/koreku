@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/koreku/static/css/main.80787219.css",
+    "main.js": "/koreku/static/js/main.1798c109.js",
+    "static/js/787.15f6e283.chunk.js": "/koreku/static/js/787.15f6e283.chunk.js",
+    "static/media/256x256.gif": "/koreku/static/media/256x256.64c9e38f56bb0766a079.gif",
+    "static/media/google.png": "/koreku/static/media/google.e12914ad8afda3f6f2e8.png",
+    "index.html": "/koreku/index.html",
+    "main.80787219.css.map": "/koreku/static/css/main.80787219.css.map",
+    "main.1798c109.js.map": "/koreku/static/js/main.1798c109.js.map",
+    "787.15f6e283.chunk.js.map": "/koreku/static/js/787.15f6e283.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.80787219.css",
+    "static/js/main.1798c109.js"
+  ]
+}
