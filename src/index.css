@@ -156,7 +156,6 @@ a {
 }
 
 /* SelectSet */
-
 .modal-content {
     background-color: var(--card-bg-color);
 }
@@ -208,6 +207,10 @@ a {
     color: var(--red);
     margin-left: 1rem;
     cursor: pointer;
+}
+
+.delete-col-btn {
+    background-color: var(--bg-color)
 }
 
 .cards-container {
