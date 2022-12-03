@@ -27,7 +27,7 @@ export const getProfile = async (session) => {
             else return []
         }
         catch (error) {
-            alert(error.message)
+            console.error(error.message)
         }
     }
 }
@@ -54,7 +54,7 @@ export const getUserCollections = async (userID) => {
             else return []
         }
         catch (error) {
-            alert(error.message)
+            console.error(error.message)
         }
     }
     else {
@@ -83,7 +83,7 @@ export const createNewCollection = async (collection_set_id, custom_name, creato
         return data;
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
     }
 }
 
@@ -102,7 +102,7 @@ export const getCollectionInfo = async (collection_id) => {
         return data
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
         return []
     }
 }
@@ -120,7 +120,7 @@ export const deleteCollection = async (collection_id) => {
 
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
     }
 }
 
@@ -139,7 +139,7 @@ export const fetchSets = async() => {
         return data
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
     }
 }
 
@@ -157,7 +157,7 @@ export const fetchCardsInSet = async (set_id) => {
         return sortCards(data);
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
         return []
     }
 }
@@ -190,7 +190,7 @@ export const fetchCardsCollection = async (collection_id) => {
         return data;
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
         return []
     }
 }
@@ -212,7 +212,7 @@ export const addCardToCollection = async (card_id, collection_id) => {
         return data;
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
         return []
     }
 
@@ -237,7 +237,7 @@ export const removeCardFromCollection = async (card_id, collection_id) => {
 
     }
     catch (error) {
-        alert(error.message)
+        console.error(error.message)
         return []
     }
 
