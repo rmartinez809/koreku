@@ -138,6 +138,7 @@ const Binder = ({ setUserCollection, userID, loading, setLoading }) => {
                             </button>
                             <button type="button"
                                 className="btn btn-primary btn-sm"
+                                id="confirm-del-btn"
                                 data-bs-dismiss="modal"
                                 onClick={ () => {
                                     handleDeleteCollection()

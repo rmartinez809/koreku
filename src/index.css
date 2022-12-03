@@ -213,6 +213,10 @@ a {
     background-color: var(--bg-color)
 }
 
+#confirm-del-btn {
+    background-color: var(--red);
+}
+
 .cards-container {
     align-self: center;
     margin-top: 2rem;
