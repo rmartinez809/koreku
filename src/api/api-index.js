@@ -80,8 +80,6 @@ export const createNewCollection = async (collection_set_id, custom_name, creato
             throw error
         }
 
-        alert("Successfully created collection!")
-
         return data;
     }
     catch (error) {

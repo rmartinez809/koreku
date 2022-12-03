@@ -47,6 +47,7 @@ const Collection = ({ userID, userCollection, setUserCollection, loading, setLoa
           </svg>
       </button>
       <div className='my-collections'>
+        {userCollection.length === 0 ? <p>Add a new collection to get started!</p>: ""}
         {
           userCollection.map( element => {
             return (
