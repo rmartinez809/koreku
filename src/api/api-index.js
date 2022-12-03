@@ -111,7 +111,7 @@ export const getCollectionInfo = async (collection_id, creator_id) => {
             return data
         }
         catch (error) {
-            alert(error.message)
+            console.error(error.message)
             window.location.assign('/')
             return []
         }
