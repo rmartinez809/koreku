@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { supabase } from "./supabaseClient";
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import googleIcon from './icons/google.png';
 
 export default function Auth() {
@@ -10,6 +10,7 @@ export default function Auth() {
   const [confirmPass, setConfirmPass] = useState('');
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const minPassLen = 6;
 
@@ -24,7 +25,7 @@ export default function Auth() {
       if (error) throw error
     }
     catch (error) {
-      alert(error.error_description || error.message)
+      console.error(error.error_description || error.message)
     }
     finally { clearFields() }
   }
@@ -42,9 +43,11 @@ export default function Auth() {
         password
       })
       if (error) throw error;
+
+      navigate('/');
     }
     catch (error) {
-      alert(error.error_description || error.message);
+      console.error(error.error_description || error.message);
     }
   }
 
@@ -55,7 +58,7 @@ export default function Auth() {
       })
     }
     catch (error) {
-      alert(error.error_description || error.message);
+      console.error(error.error_description || error.message);
     }
   }
 
@@ -70,7 +73,7 @@ export default function Auth() {
       <main>
       <div className="intro-text-container">
         <h1 className="">Koreku</h1>
-        <p>A new way to organize your collection</p>
+        <p>A new way to organize your trading card collection</p>
       </div>
       <div className="card login-card card-bg-color">
         <div className="card-body d-grid gap-2 center-text">
